@@ -3,7 +3,7 @@ script: ant main
 
 deploy:
   provider: releases
-  api_key: "5e7c9abb6f264401a93c536ec947efc2efce41b4"
+  api_key: "7c442b46025bc57254409dabddb22b37c08c1cbe"
   file: "dist/Calculator.jar"
   skip_cleanup: true
   on:
