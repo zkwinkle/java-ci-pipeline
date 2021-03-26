@@ -1,9 +1,9 @@
 language: java
-script: ant main && java CalculatorTest
+script: ant main && java test/cr/ac/itcr/CalculatorTest
 
 deploy:
   provider: releases
-  api_key: "GITHUB_OAUTH_KEY"
+  api_key: "$GITHUB_OAUTH_KEY"
   file: "dist/Calculator.jar"
   skip_cleanup: true
   on:
