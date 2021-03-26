@@ -3,7 +3,7 @@ script: ant main
 
 deploy:
   provider: releases
-  api_key: "7c442b46025bc57254409dabddb22b37c08c1cbe"
+  api_key: "GITHUB_OAUTH_KEY"
   file: "dist/Calculator.jar"
   skip_cleanup: true
   on:
