@@ -8,6 +8,6 @@ deploy:
   file_glob: true
   on:
     repo: zkwinkle/java-ci-pipeline
-    branch: master
+    branch: main
   name: $YOUR_RELEASE_NAME
   body: $YOUR_RELEASE_CONTENT
