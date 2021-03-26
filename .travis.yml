@@ -3,11 +3,8 @@ script: ant main
 
 deploy:
   provider: releases
+  api_key: "5e7c9abb6f264401a93c536ec947efc2efce41b4"
   file: "dist/Calculator.jar"
   skip_cleanup: true
-  file_glob: true
   on:
-    repo: zkwinkle/java-ci-pipeline
     branch: main
-  name: $YOUR_RELEASE_NAME
-  body: $YOUR_RELEASE_CONTENT
