@@ -8,3 +8,9 @@ deploy:
   skip_cleanup: true
   on:
     branch: main
+
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit Tests"
+      script: ./test/cr/ac/itcr/CalculatorTest
