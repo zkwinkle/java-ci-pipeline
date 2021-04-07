@@ -1,38 +1,53 @@
 package cr.ac.itcr;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Assert;
+import org.junit.Test;
+
 
 public class CalculatorTest {
-    public Calculator calculator = new Calculator();
+
+    private Calculator calculator;
+
+    @Before
+    public void setUp() {
+        calculator = new Calculator();
+    }
+
+    @After
+    public void tearDown() {
+        calculator = null;
+    }
 
     @Test
     public void normalSum() {
-        Assertions.assertEquals(666, calculator.sum(222, 444));
+        Assert.assertEquals(666, calculator.sum(222, 444));
     }
 
     @Test
-    void negativeSum() {
-        Assertions.assertEquals(-15, calculator.sum(20, -35));
+    public void negativeSum() {
+        Assert.assertEquals(-15, calculator.sum(20, -35));
     }
 
     @Test
-    void normalMultiply() {
-        Assertions.assertEquals(63, calculator.multiply(7, 9));
+    public void normalMultiply() {
+        Assert.assertEquals(63, calculator.multiply(7, 9));
     }
 
     @Test
-    void floatMultiply() {
-        Assertions.assertEquals(9.75, calculator.multiply(2.5f, 3.9f));
+    public void floatMultiply() {
+        Assert.assertEquals(9.75, calculator.multiply(2.5f, 3.9f), 0);
     }
 
     @Test
-    void normalDivision() {
-        Assertions.assertEquals(2f/3f, calculator.divide(2, 3));
+    public void normalDivision() {
+        Assert.assertEquals(2f/3f, calculator.divide(2, 3), 0);
     }
 
     @Test
-    void negativeDivision() {
-        Assertions.assertEquals(-8, calculator.divide(64, -8));
+    public void negativeDivision() {
+        Assert.assertEquals(-8, calculator.divide(64, -8), 0);
     }
 }
+

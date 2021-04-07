@@ -3,32 +3,32 @@
     <!-- Sets variables which can later be used. -->
     <!-- The value of a property is accessed via ${} -->
     <property name="src.dir" location="src" />
+    <property name="src.dir" location="src" />
     <property name="build.dir" location="bin" />
     <property name="dist.dir" location="dist" />
     <property name="docs.dir" location="docs" />
-
-    <!-- Deletes the existing build, docs and dist directory-->
-    <target name="clean">
-        <delete dir="${build.dir}" />
-        <delete dir="${docs.dir}" />
-        <delete dir="${dist.dir}" />
-    </target>
-
-    <!-- Creates the  build, docs and dist directory-->
-    <target name="makedir">
-        <mkdir dir="${build.dir}" />
-        <mkdir dir="${docs.dir}" />
-        <mkdir dir="${dist.dir}" />
-    </target>
+    <property name="test.dir" location="test" />
+    <property name="target.classes.test.dir" location="target.classes.test" />
+    <property name="target.classes.java.dir" location="target.classes.java" />
 
     <!-- Compiles the java code (including the usage of library for JUnit -->
-    <target name="compile" depends="clean, makedir">
-        <javac srcdir="${src.dir}" destdir="${build.dir}">
+
+    <target name="compile.java">
+        <mkdir dir="${target.classes.java.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${target.classes.java.dir}">
+        </javac>
+    </target>
+
+    <target name="compile.test" depends="compile.java">
+        <mkdir dir="${target.classes.test.dir}"/>
+        <javac srcdir="${test.dir}" destdir= "${target.classes.test.dir}">
             <classpath>
-                <pathelement path="lib/junit-jupiter-5.4.0.jar"/>
+                <pathelement location="${target.classes.java.dir}"/>
             </classpath>
         </javac>
     </target>
+
+    <target name="compile" depends="compile.java, compile.test"/>
 
     <!-- Creates Javadoc -->
     <target name="docs" depends="compile">
@@ -42,33 +42,25 @@
 
     <!--Creates the deployable jar file  -->
     <target name="jar" depends="compile">
-        <jar destfile="${dist.dir}\Calculator.jar" basedir="${build.dir}">
+        <jar destfile="${dist.dir}\Calculator.jar" basedir="${target.classes.java.dir}">
             <manifest>
                 <attribute name="Main-Class" value="cr.ac.itcr.Main" />
             </manifest>
         </jar>
     </target>
 
-    <path id="test.path">
-        <pathelement location="test" />
-    </path>
-
-    <target name="unit tests" depends="compile">
-        <junit printsummary="yes" haltonfailure="no">
-
-            <classpath refid="test.path" />
-            <classpath location="${build.dir}" />
-
-            <!-- Make sure these two libraries are included -->
-            <classpath location="lib/junit-jupiter-5.4.0.jar" />
-
-            <test name="cr.ac.itcr.CalculatorTest" haltonfailure="yes">
-            </test>
-
+    <target name="CalculatorTest" depends="compile">
+        <junit printsummary="yes" haltonfailure="yes" haltonerror="yes">
+            <formatter type = "plain" usefile="false"/>
+            <test name="cr.ac.itcr.CalculatorTest"/>
+                <classpath>
+                    <pathelement location="${target.classes.java.dir}"/>
+                    <pathelement location="${target.classes.test.dir}"/>
+                </classpath>
         </junit>
     </target>
 
-    <target name="main" depends="compile, jar, docs, unit tests">
+    <target name="main" depends="compile, jar, docs, CalculatorTest">
         <description>Main target</description>
     </target>
 
