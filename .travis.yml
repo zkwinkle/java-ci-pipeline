@@ -1,15 +1,10 @@
 language: java
 script: ant main #&& java test/cr/ac/itcr/CalculatorTest test
 
-jobs:
-  include:
-    - stage: "Tests"
-      name: "Unit Tests"
-      script: ./test/cr/ac/itcr/CalculatorTest
-    - stage: deploy
-      provider: releases
-      api_key: "$GITHUB_OAUTH_KEY"
-      file: "dist/Calculator.jar"
-      skip_cleanup: true
-      on:
-        branch: main
+deploy:
+  provider: releases
+  api_key: "$GITHUB_OAUTH_KEY"
+  file: "dist/Calculator.jar"
+  skip_cleanup: true
+  on:
+    branch: main

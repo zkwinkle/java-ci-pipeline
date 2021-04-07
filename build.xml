@@ -24,8 +24,10 @@
     <!-- Compiles the java code (including the usage of library for JUnit -->
     <target name="compile" depends="clean, makedir">
         <javac srcdir="${src.dir}" destdir="${build.dir}">
+            <classpath>
+                <pathelement path="lib/junit-jupiter-5.4.0.jar"/>
+            </classpath>
         </javac>
-
     </target>
 
     <!-- Creates Javadoc -->
@@ -47,8 +49,29 @@
         </jar>
     </target>
 
-    <target name="main" depends="compile, jar, docs">
+    <path id="test.path">
+        <pathelement location="test" />
+    </path>
+
+    <target name="unit tests" depends="compile">
+        <junit printsummary="yes" haltonfailure="no">
+
+            <classpath refid="test.path" />
+            <classpath location="${build.dir}" />
+
+            <!-- Make sure these two libraries are included -->
+            <classpath location="lib/junit-jupiter-5.4.0.jar" />
+
+            <test name="cr.ac.itcr.CalculatorTest" haltonfailure="yes">
+            </test>
+
+        </junit>
+    </target>
+
+    <target name="main" depends="compile, jar, docs, unit tests">
         <description>Main target</description>
     </target>
+
+
 
 </project>
