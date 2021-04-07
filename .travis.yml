@@ -1,18 +1,10 @@
 language: java
-#before_script:
-#  - sudo apt-get install ant-optional
-#script: ant main #&& java test/cr/ac/itcr/CalculatorTest test
+before_script:
+  - sudo apt-get install ant-optional
+script: ant main #&& java test/cr/ac/itcr/CalculatorTest test
 
-#deploy:
-#  provider: releases
-#  api_key: "$GITHUB_OAUTH_KEY"
-#  file: "dist/Calculator.jar"
-#  skip_cleanup: true
-#  on:
-#    branch: main
-
-script:
-  - java ./test/cr/ac/itcr/CalculatorTest.java
+#script:
+#  - java ./test/cr/ac/itcr/CalculatorTest.java
 
 deploy:
   provider: releases
