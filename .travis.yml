@@ -12,7 +12,7 @@ language: java
 #    branch: main
 
 script:
-  - java ./test/cr/ac/itcr/CalculatorTest
+  - java ./test/cr/ac/itcr/CalculatorTest.java
 
 deploy:
   provider: releases
