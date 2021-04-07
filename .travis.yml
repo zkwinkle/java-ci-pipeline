@@ -1,4 +1,6 @@
 language: java
+before_script:
+  - sudo apt-get install ant-optional
 script: ant main #&& java test/cr/ac/itcr/CalculatorTest test
 
 deploy:
