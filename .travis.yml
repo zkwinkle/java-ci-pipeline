@@ -3,9 +3,6 @@ before_script:
   - sudo apt-get install ant-optional
 script: ant all #&& java test/cr/ac/itcr/CalculatorTest test
 
-#script:
-#  - java ./test/cr/ac/itcr/CalculatorTest.java
-
 deploy:
   provider: releases
   api_key: "$GITHUB_OAUTH_KEY"
@@ -13,17 +10,3 @@ deploy:
   skip_cleanup: true
   on:
     branch: main
-
-#jobs:
-#  include:
-#    - stage: "Tests"
-#      name: "Unit Tests"
-#      script: ./test/cr/ac/itcr/CalculatorTest
-#    - stage: deploy
-#      provider: releases
-#      api_key: "$GITHUB_OAUTH_KEY"
-#      file: "dist/Calculator.jar"
-#      skip_cleanup: true
-#      on:
-#        branch: main
-#      script: ant main
